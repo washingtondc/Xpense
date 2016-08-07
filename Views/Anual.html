@@ -1,0 +1,55 @@
+﻿<div id="main-content" ng-init="getResumoAnual()">
+    <h1>Resumo anual</h1>
+
+    <div class="card-section card-header">
+
+    </div>
+    <div class="card-section " ng-show="ResumoAnual.length == 0 && !Loading">
+        <span class="no-records">nenhum lançamento a exibir</span>
+    </div>
+    <div class="grid" ng-show="ResumoAnual.length > 0">
+        <div class="grid-row grid-header">
+            <div class="grid-column-titles">
+                <div flex="20"></div>
+                <div flex>Jan</div>
+                <div flex>Fev</div>
+                <div flex>Mar</div>
+                <div flex>Abr</div>
+                <div flex>Mai</div>
+                <div flex>Jun</div>
+                <div flex>Jul</div>
+                <div flex>Ago</div>
+                <div flex>Set</div>
+                <div flex>Out</div>
+                <div flex>Nov</div>
+                <div flex>Dez</div>
+            </div>
+        </div>
+        <div class="grid-row" ng-repeat="categoria in ResumoAnual">
+            <div class="grid-row-wrapper">
+                <div flex="20">{{categoria.Titulo}}</div>
+                <div flex ng-repeat="saldo in categoria.ValorMes track by $index">{{saldo | currency}}</div>
+            </div>
+        </div>
+        <div class="grid-footer">
+            <div class="grid-row linha-entradas">
+                <div class="grid-row-wrapper">
+                    <div flex="20">Entradas</div>
+                    <div class="corCredito" flex ng-repeat="val in Entradas track by $index">{{ val | currency}}</div>
+                </div>
+            </div>
+            <div class="grid-row linha-saidas">
+                <div class="grid-row-wrapper">
+                    <div flex="20">Saídas</div>
+                    <div class="corDebito" flex ng-repeat="Saida in Saidas track by $index">{{ Saida | currency}}</div>
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="grid-row-wrapper">
+                    <div flex="20">Saldo</div>
+                    <div ng-class="{'bgCredito':Sal>=0,'bgDebito':Sal<0}" flex ng-repeat="Sal in Saldo track by $index">{{ Sal | currency}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

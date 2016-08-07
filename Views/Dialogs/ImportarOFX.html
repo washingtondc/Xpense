@@ -1,0 +1,34 @@
+﻿<md-dialog aria-label="Cartão" ng-cloak flex="40">
+    <form name="frmImportarOFX" novalidate ng-submit="frmImportarOFX.$valid && uploadFile()">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Selecione o arquivo a importar</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+
+                <div class="bs-callout">Como gerar o arquivo no banco?</div>
+                <div layout="row">
+                    <input type="file" file-model="myFile" />
+                </div>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancel()">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-disabled="!frmImportarOFX.$valid">
+                Próximo passo
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+

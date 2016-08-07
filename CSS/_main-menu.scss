@@ -1,0 +1,105 @@
+﻿/*MAIN MENU*/
+.menubar {
+	position:fixed;
+	padding: 0px;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
+	width:100%;
+	height: 48px;
+	line-height: 48px;
+	z-index:100;
+    background-image: url("../Images/topo_background.jpg");
+	
+	.logo {
+		padding:5px;
+		margin-right: 5px;
+	}
+
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 5;
+		display: flex;
+		flex-direction: row;
+	}
+
+
+	li > a {
+		display: block;
+		color: white;
+		text-align: center;
+		width: 55px;
+		height:48px;
+
+		md-icon {
+			color: #f1f1f1;
+		}
+	}
+
+	li > a:hover:not(.dropbtn) {
+		border-bottom: 3px solid red;
+	}
+
+	li.dropdown {
+		display: inline-block;
+	}
+
+	.dropdown-content {
+		opacity: 0;
+		visibility:hidden;
+		position: absolute;
+		background-color: #FFF;
+		min-width: 250px;
+		box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.5);
+		z-index: 555;
+		transform:translateX(-180px);
+		border-top: 3px solid red;
+		transition: all .2s ease-in-out;
+
+		&> div{
+			padding:5px;
+		}
+
+		a.button-bottom{
+            font-weight:700;
+			height:30px;
+			line-height:30px;
+			color:$darkGray;
+			text-align:center;
+			padding:10px;
+		}
+
+		a:hover.button-bottom{
+            background-color:transparent;
+			color: $accentColor;
+		}
+	}
+
+	.dropdown-content a {
+		color: black;
+		padding: 5px;
+		display: block;
+		text-align: left;
+	}
+
+	.dropdown-content a:hover {
+		background-color: #f1f1f1;
+		md-icon{
+			color:$accentColor;
+		}
+	}
+
+	.dropdown:hover .dropdown-content {
+		opacity: 1;
+		visibility:visible;
+	}
+
+	.avatar {
+		width: 30px;
+		height: 30px;
+		margin: 5px;
+		border: 1px solid #FFF;
+		background-color: #FFF;
+	}
+}

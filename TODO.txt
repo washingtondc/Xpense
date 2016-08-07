@@ -1,0 +1,39 @@
+BUGS
+	Não permitir transferir mais do que o saldo que tem na conta
+	!Implementar sistema de autenticação com detecção de timeout
+	Ordenar lançamentos	ao inserir
+	Não permitir pagar fatura que não está fechada
+	ao preencher o dia de fechamento da fatura, já calcula o dia do fechamento (10 dias antes)
+	Marcar lançamentos atrasados na lista de lançamentos do mês (exclamação? cor?)
+	corrigir menu mobile
+	criar opção de troca de senha no perfil
+	mostrar que não existem lançamentos no grafico de gastos por categoria
+	Mostrar estatisticas na tela de perfil
+	Criar rodapé
+	Em modo mobile os dialogs devem ocupar toda a tela
+	Em modo mobile botao fechar do dialog deve ser uma seta na esquerda (?)
+	Criar busca
+	Ao relembrar o login, mostrar o avatar tb
+	Não é necessário filtrar no banco, aplicar filtros no Model ??
+IDÉIAS
+	
+	Ao efetuar lançamento selecionar a forma de pagamento, não a conta ou cartão em telas separadas ? (tudo são contas, cartões sao contas de um tipo diferente)
+	Permitir compartilhar conta com permissões
+	Mostrar saldo por dia na tela de lançamentos (Configurar se visualiza ou nao para nao poluir)
+	Criar lançamento em debito automático
+	Enviar lembretes por email
+	Permitir excluir vários lançamentos ao mesmo tempo
+	Permitir filtrar lançamentos por categoria
+	Implementar transactions para não efetuar operações pela metade
+	Implementar recuperação de senha
+	Nas telas de edição, mostrar o descritivo do registro sendo editado
+	Categorizar automaticamente os lançamentos importados de acordo com os lançamentos já cadastrados
+	tags para lançamentos
+	busca de lançamentos
+	Tela de "sobre" com versão do software
+	Permitir subcategorias
+	Botao para excluir categorias não usadas. (= quicken)
+	Selecionar lançamentos e mover para outra categoria
+	usar Gravatar ?
+	https://github.com/mailcheck/mailcheck sugerir correção no email digitado
+

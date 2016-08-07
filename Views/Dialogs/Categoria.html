@@ -1,0 +1,55 @@
+﻿<md-dialog aria-label="Categoria" ng-cloak flex="40">
+    <form name="frmCategoria" novalidate ng-submit="frmCategoria.$valid && Salvar()">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Categoria</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div layout layout-sm="row">
+                    <md-input-container flex>
+                        <label>Nome</label>
+                        <input name="CatNom" ng-model="Categoria.CatNom" ng-required="true" focus-if>
+                        <div ng-messages="frmCategoria.CatNom.$error">
+                            <div ng-message="required">Preencha o nome da categoria.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div layout layout-sm="row">
+                    <md-input-container flex>
+                        <label>Descrição</label>
+                        <input ng-model="Categoria.CatDes">
+                    </md-input-container>
+                </div>
+                <div layout layout-sm="row">
+                    <md-input-container flex>
+                        <label>Orçamento</label>
+                        <input ng-model="Categoria.CatOrc" format="number">
+                    </md-input-container>
+
+                    <md-input-container flex>
+                        <color-picker ng-model="Categoria.CatCor"></color-picker>
+                    </md-input-container>
+                </div>
+
+                <input id="CatCod" type="hidden" value="<%=objCategoria.CatCod %>" />
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancel()">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-disabled="!frmCategoria.$valid">
+                Salvar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

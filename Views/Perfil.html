@@ -1,0 +1,60 @@
+﻿<form name="frmPerfil" novalidate>
+    <div id="main-content" ng-init="getLoggedUserData()">
+        <h1>Perfil</h1>
+        <div class="card-section card-header">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <md-button ng-click="Salvar()">
+                        <md-tooltip>Salvar Alterações</md-tooltip>
+                        <md-icon>save</md-icon>
+                        Salvar Alterações
+                    </md-button>
+
+                    <md-button ng-click="resetAccount()">
+                        <md-icon>delete</md-icon>
+                        Resetar Conta
+                    </md-button>
+                </div>
+            </md-toolbar>
+        </div>
+        <!--Content-->
+        <div class="card-section" layout="row">
+            <div flex="10">
+                <div class="circle avatar-perfil" ng-click="SelectFile()">
+                    <img ng-src="Images/Avatar/{{usuario.Avatar}}" />
+                </div>
+                <input type="file" id="AvatarFileInput" name="Avatar" file-model="myFile" ng-show="false" />
+            </div>
+            <div flex=>
+                <div layout flex>
+                    <md-input-container flex>
+                        <label>Nome</label>
+                        <md-icon>person</md-icon>
+                        <input name="UsuNom" ng-model="usuario.UsuNom" focus-if ng-required="true" ng-minlength="3" />
+                        <div ng-messages="frmPerfil.UsuNom.$error">
+                            <div ng-message="required">Preencha o nome.</div>
+                            <div ng-message="minlength">O nome deve ter no mínimo 3 caracteres.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div layout flex>
+                    <md-input-container flex>
+                        <label>Email</label>
+                        <md-icon>email</md-icon>
+                        <input name="UsuEml" ng-model="usuario.UsuEml" check-login ng-pattern="/^.+@.+\..+$/" ng-required="true" />
+                        <div ng-messages="frmPerfil.UsuEml.$error">
+                            <div ng-message="pattern">Informe um email válido.</div>
+                            <div ng-message="invalidUsername">Email indisponível.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </div>
+            <div flex="20">
+                Estatísticas
+            </div>
+        </div>
+    </div>
+</form>
+
+

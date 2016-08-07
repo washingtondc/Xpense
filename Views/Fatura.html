@@ -1,0 +1,56 @@
+﻿<div id="main-content" ng-init="init()">
+    <h1>Fatura de {{meses[mes-1]}}</h1>
+    <div class="card-section card-header">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button ng-show="Lancamentos.length > 0" ng-controller="FaturasController" ng-click="pagarFatura(CarCod, mes, ano, $event)"><md-icon><md-tooltip md-direction="top">Pagar fatura</md-tooltip>done</md-icon>Pagar Fatura</md-button>
+                <span flex></span>
+                <month-navigation></month-navigation>
+            </div>
+        </md-toolbar>
+    </div>
+    <div class="card-section">
+        <span class="no-records" ng-show="Lancamentos.length == 0 && !Loading">Nenhum lançamento nesta fatura</span>
+    </div>
+    
+    <div class='grid' ng-show="Lancamentos.length > 0">
+        <div class="grid-row grid-header">
+            <div class="grid-column-titles">
+                <div flex="10">Dia</div>
+                <div flex>Descritivo</div>
+                <div flex="30">Categoria</div>
+                <div flex="20">Valor</div>
+            </div>
+        </div>
+        <div class="grid-row" ng-repeat="Lancamento in Lancamentos | orderBy:'LanDia'">
+            <div class="grid-row-wrapper">
+                <div flex="10">{{Lancamento.LanDat | jsDate | date:"dd"}}</div>
+                <div flex>
+                    <span ng-class="{'deleted':Lancamento.Parcela.LanEftVal>0}">{{Lancamento.LanDes}}</span>
+                    <span ng-show="Lancamento.LanQtdPar>1 && Lancamento.LanFix==false">({{Lancamento.Parcela.ParSeq}}/{{Lancamento.LanQtdPar}})</span>
+                </div>
+                <div flex="30">{{Lancamento.Categoria.CatNom}}</div>
+                <div flex="20" ng-class="{'corCredito':Lancamento.LanTip=='E', 'corDebito':Lancamento.LanTip=='S'}">{{Lancamento.LanVal | currency}}</div>
+            </div>
+        </div>
+        <div class="grid-footer">
+            <div class="grid-row" ng-show="ValorPendente>0">
+                <div class="grid-row-wrapper">
+                    <div flex="10"></div>
+                    <div flex>Valor Pendente</div>
+                    <div flex="30"></div>
+                    <div flex="20">{{ValorPendente | currency}}</div>
+                </div>
+            </div>
+
+            <div class="grid-row">
+                <div class="grid-row-wrapper">
+                    <div flex="10">Total</div>
+                    <div flex></div>
+                    <div flex="30"></div>
+                    <div flex="20">{{valorTotalFatura | currency}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

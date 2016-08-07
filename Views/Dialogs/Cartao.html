@@ -1,0 +1,76 @@
+﻿<md-dialog aria-label="Cartão" ng-cloak flex="40">
+    <form name="frmCartao" novalidate ng-submit="frmCartao.$valid && Salvar()">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Cartão</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div layout layout-sm="row">
+                    <md-input-container flex>
+                        <label>Bandeira</label>
+                        <md-select name="CarBan" ng-model="Cartao.CarBan" ng-required>
+                            <md-option ng-repeat="Cartao in CartoesConstant" value="{{Cartao.nome}}"><md-icon class="pf {{Cartao.icone}} md-padding"></md-icon> {{Cartao.nome}}</md-option>
+                        </md-select>
+                        <div ng-messages="frmCartao.CarBan.$error">
+                            <div ng-message="required">Selecione a bandeira.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                
+                <div layout layout-sm="row">
+                    <md-input-container flex>
+                        <label>Descrição</label>
+                        <input name="CarNom" ng-model="Cartao.CarNom" ng-required="true" focus-if>
+                        <div ng-messages="frmCartao.CarNom.$error">
+                            <div ng-message="required">Informe o descritivo.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div layout layout-sm="row">
+                    <md-input-container flex>
+                        <label>Limite</label>
+                        <input ng-model="Cartao.CarLim" format="number">
+                    </md-input-container>
+                </div>
+
+                <div layout layout-sm="row">
+                    <md-input-container flex>
+                        <label>Dia fechamento</label>
+                        <md-icon>date_range</md-icon>
+                        <input name="CarDiaFec" ng-model="Cartao.CarDiaFec" ng-required="true">
+                        <div ng-messages="frmCartao.CarDiaFec.$error">
+                            <div ng-message="required">Informe o dia de fechamento da fatura.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex>
+                        <label>Dia pagamento</label>
+                        <md-icon>date_range</md-icon>
+                        <input name="CarDiaPag" ng-model="Cartao.CarDiaPag" ng-required="true" not-equal-to="Cartao.CarDiaFec">
+                        <div ng-messages="frmCartao.CarDiaPag.$error">
+                            <div ng-message="required">Informe o dia de pagamento da fatura.</div>
+                            <div ng-message="notEqualTo">Dia de pagamento não pode ser igual o dia de fechamento.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </div>
+            </md-dialog-content>
+            <md-dialog-actions layout="row">
+                <span flex></span>
+                <md-button ng-click="cancel()">
+                    Cancelar
+                </md-button>
+                <md-button type="submit" ng-disabled="!frmCartao.$valid">
+                    Salvar
+                </md-button>
+            </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,54 @@
+﻿<div>
+    <style type="text/css">
+        #panel {
+            z-index: 500;
+            position: absolute;
+            padding: 10px;
+            width: 200px;
+            background-color: #FFF;
+            /*visibility:hidden;*/
+            display: none;
+            transform: translateX(-100px);
+            transform: translateY(-50px);
+            box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+            margin-left: -100px;
+            margin-top: -50px;
+        }
+            #panel.show {
+                /*visibility: visible;*/
+                display: block;
+            }
+        .color-circle{
+            text-align:center;
+            /*display:block;*/
+            float:left;
+            margin:5px;
+            width:30px;
+            height:30px;
+            border-radius:50%;
+            cursor:pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .color-circle:hover{
+            box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+        }
+        .color-circle md-icon{
+            color:#FFFFFF;
+        }
+
+        #color-picker.md-icon-button {
+            border: 1px solid #dcdcdc;
+        }
+    </style>
+
+    <md-button id="color-picker" class="md-icon-button" style="background-color:{{selectedColor}} !important" ng-click="togglePicker()">
+        <md-tooltip>Cor</md-tooltip>
+        <md-icon style="color:#FFFFFF !important;">format_color_fill</md-icon>
+    </md-button>
+
+    <div ng-class="{'show':colorPickerisOpen}" id="panel">
+        <div ng-repeat="color in colors" class="color-circle" style="background-color:{{color}} !important" ng-click="setColor(color)">
+            <md-icon ng-show="color===selectedColor">done</md-icon>
+        </div>
+    </div>
+</div>

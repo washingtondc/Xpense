@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html ng-app="Xpense">
+<head>
+    <link href="CSS/Fonts/WebFonts.css" rel="stylesheet" />
+    <link href="CSS/Fonts/paymentfont.min.css" rel="stylesheet" />
+    <link href="CSS/Plugins/SweetAlert/sweet-alert.css" rel="stylesheet" type="text/css" />
+    <link href="CSS/Plugins/Angular/angular-material.min.css" rel="stylesheet" />
+    <link href="CSS/Plugins/md-data-table/md-data-table.css" rel="stylesheet" />
+    <link href="CSS/main.min.css" rel="stylesheet" />
+    <link rel="stylesheet" media='screen and (max-width: 500px)' href='CSS/Mobile.css' />
+
+    <!--JQUERY-->
+    <script src="Scripts/Plugins/JQuery/jquery.min.js"></script>
+    <script src="Scripts/Library/ScrollFunctions.js"></script>
+
+    <!--ANGULAR-->
+    <script src="Scripts/Plugins/Angular/angular.js"></script>
+    <script src="Scripts/Plugins/Angular/angular-aria.min.js"></script>
+    <script src="Scripts/Plugins/Angular/angular-animate.min.js"></script>
+    <script src="Scripts/Plugins/Angular/angular-material.min.js"></script>
+    <script src="Scripts/Plugins/Angular/angular-messages.min.js"></script>
+    <script src="Scripts/Plugins/Angular/angular-route.js"></script>
+    <script src="Scripts/Plugins/Angular/angular-cookies.min.js"></script>
+    <script src="Scripts/Plugins/Angular/angular-locale_pt-br.js"></script>
+    <script src="Scripts/Plugins/Angular/focusIf.js"></script>
+
+
+    <!--PRICE FORMAT-->
+    <script src="Scripts/Plugins/PriceFormat/jquery.price_format.2.0.min.js"></script>
+
+    <!--SWEET ALERT-->
+    <script src="Scripts/Plugins/SweetAlert/sweet-alert.min.js" type="text/javascript"></script>
+
+    <!--SISTEMA-->
+    <script src="Scripts/Core.js"></script>
+    <script src="Scripts/Services/getDateFromJSONService.js"></script>
+    <script src="Scripts/App.js"></script>
+    <script src="Scripts/Config/routeConfig.js"></script>
+    <script src="Scripts/Filters/jsDateFilter.js"></script>
+    <script src="Scripts/Services/UserInfo.js"></script>
+    <script src="Scripts/Services/EmailService.js"></script>
+
+    <!--CONSTANTS-->
+    <script src="Scripts/Constants/CartoesConstant.js"></script>
+
+    <!--DIRECTIVES-->
+    <script src="Scripts/Directives/Format.js"></script>
+    <script src="Scripts/Services/ToastService.js"></script>
+    <script src="Scripts/Directives/MonthNavigation.js"></script>
+    <script src="Scripts/Directives/ColorPickerDialogController.js"></script>
+    <script src="Scripts/Directives/ColorPicker.js"></script>
+    <script src="Scripts/Directives/CheckLoginDisponivel.js"></script>
+    <script src="Scripts/Directives/CheckGreaterThan.js"></script>
+    <script src="Scripts/Directives/NotEqualTo.js"></script>
+
+    <!--FATURA-->
+    <script src="Scripts/Services/ContasService.js"></script>
+    <script src="Scripts/Services/FaturasService.js"></script>
+    <script src="Scripts/Controllers/FaturasController.js"></script>
+
+    <!--Login-->
+    <script src="Scripts/Services/LoginService.js"></script>
+    <script src="Scripts/Controllers/LoginController.js"></script>
+
+    <!--Lançamentos-->
+    <script src="Scripts/Models/LancamentosModel.js"></script>
+    <script src="Scripts/Services/ContasService.js"></script>
+    <script src="Scripts/Services/LancamentosService.js"></script>
+    <script src="Scripts/Controllers/LancamentosController.js"></script>
+    <script src="Scripts/Controllers/Dialogs/LancamentoDialogController.js"></script>
+    <script src="Scripts/Controllers/Dialogs/EfetivarDialogController.js"></script>
+
+    <!--Dashboard-->
+    <script src="Scripts/Plugins/HighCharts/highcharts.js" type="text/javascript"></script>
+    <script src="Scripts/Library/GraficoGastosCategoria.js"></script>
+    <script src="Scripts/Library/GraficoSaldoMes.js"></script>
+    <script src="Scripts/Services/DashboardService.js"></script>
+    <script src="Scripts/Controllers/DashboardController.js"></script>
+
+    <!--Categorias-->
+    <script src="Scripts/Models/CategoriasModel.js"></script>
+    <script src="Scripts/Services/CategoriasService.js"></script>
+    <script src="Scripts/Controllers/CategoriasController.js" type="text/javascript"></script>
+    <script src="Scripts/Controllers/Dialogs/CategoriaDialogController.js"></script>
+
+    <!--Contas-->
+    <script src="Scripts/Models/ContasModel.js"></script>
+    <script src="Scripts/Services/ContasService.js"></script>
+    <script src="Scripts/Controllers/Dialogs/ContasDialogController.js"></script>
+    <script src="Scripts/Controllers/ContasController.js" type="text/javascript"></script>
+
+    <!--Cartões-->
+    <script src="Scripts/Models/CartoesModel.js"></script>
+    <script src="Scripts/Services/CartoesService.js"></script>
+    <script src="Scripts/Controllers/CartoesController.js" type="text/javascript"></script>
+    <script src="Scripts/Controllers/Dialogs/CartaoDialogController.js"></script>
+    <script src="Scripts/Controllers/Dialogs/PagarFaturaDialogController.js"></script>
+
+    <!--Calendario-->
+    <script src="Scripts/Plugins/Fullcalendar/moment.min.js" type="text/javascript"></script>
+    <script src="Scripts/Plugins/Fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+    <link href="CSS/Plugins/Fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/Plugins/Fullcalendar/lang/pt-br.js"></script>
+
+    <!--Usuários-->
+    <script src="Scripts/Services/UsuarioService.js"></script>
+    <script src="Scripts/Controllers/UsuarioController.js"></script>
+
+    <!--CONFIG-->
+    <script src="Scripts/Services/ConfigService.js"></script>
+    <script src="Scripts/Controllers/ConfigController.js"></script>
+
+    <!--Importar OFX-->
+    <script src="Scripts/Directives/fileModel.js"></script>
+    <script src="Scripts/Services/FileUpload.js"></script>
+    <script src="Scripts/Services/ImportService.js"></script>
+    <script src="Scripts/Controllers/Dialogs/ImportDialogController.js"></script>
+    <script src="Scripts/Controllers/ImportController.js"></script>
+
+    <title></title>
+</head>
+<body layout="column" layout-fill>
+    <md-sidenav md-component-id="sideNav" class="md-sidenav-left" ng-cloak>
+        <div class="sideNav-header" ng-controller="LoginController">
+            <div class="circle avatar">
+                <img ng-src="Images/avatar/{{USER_INFO.Avatar}}" />
+            </div>
+        </div>
+        <div layout="column" layout-align="start start">
+            <md-button class="shortcut  " href="#/Dashboard">
+                <md-icon>dashboard</md-icon>
+                dashboard
+            </md-button>
+            <md-button class="shortcut  " href="#/Anual">
+                <md-icon>event_note</md-icon>
+                Anual
+            </md-button>
+            <md-button class="shortcut  " href="#/Lancamentos">
+                <md-icon>monetization_on</md-icon>
+                Lançamentos
+            </md-button>
+            <md-button class="shortcut  " href="#/Categorias">
+                <md-icon>view_list</md-icon>
+                Categorias
+            </md-button>
+            <md-button class="shortcut  " href="#/Contas">
+                <md-icon>account_balance</md-icon>
+                Contas
+            </md-button>
+            <md-button class="shortcut  " href="#/Cartoes">
+                <md-icon>credit_card</md-icon>
+                Cartões de crédito
+            </md-button>
+            <md-button class="shortcut" href ng-click="selectFile()" ng-controller="ImportController">
+                <md-icon>input</md-icon>
+                Importar lançamentos
+            </md-button>
+        </div>
+    </md-sidenav>
+
+    <header>
+        <nav class="menubar" ng-cloak>
+            <a class="md-icon-button" ng-click="toggleSidenav()" ng-controller="DashboardController"><md-icon>menu</md-icon></a>
+            <div class="logo">
+                <a href="#/Dashboard">
+                    <img height="50" src="Images/logo xpense.png" />
+                </a>
+            </div>
+            <ul class="main-menu">
+                <li><a href="#/Dashboard"><md-icon>dashboard</md-icon></a></li>
+                <li><a href="#/Anual"><md-icon>event_note</md-icon></a></li>
+                <li><a href="#/Lancamentos"><md-icon>monetization_on</md-icon></a></li>
+                <li><a href="#/Categorias"><md-icon>view_list</md-icon></a></li>
+                <li><a href="#/Contas"><md-icon>account_balance</md-icon></a></li>
+                <li><a href="#/Cartoes"><md-icon>credit_card</md-icon></a></li>
+                <li><a href ng-controller="ImportController" ng-click="selectFile()"><md-icon>input</md-icon></a></li>
+            </ul>
+            <span flex></span>
+            <ul>
+                <li><a href="#"><md-icon>search</md-icon></a></li>
+                <li class="dropdown" ng-show="alertas.length > 0" ng-controller="LancamentosController" ng-init="getAlertas()">
+                    <a href class="dropbtn">
+                        <md-icon>notifications</md-icon>
+                        <span class="badge">{{qtdAlertas}}</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <div ng-class="{'left-border-credito':alerta.LanTip==='E','left-border-debito':alerta.LanTip==='S'}" ng-repeat="alerta in alertas" layout="row">
+                            <div flex="15" class="bold">{{alerta.LanDia}}</div>
+                            <div flex>{{alerta.LanDes}}</div>
+                            <div flex>{{alerta.LanVal | currency}}</div>
+                            <div layout="row">
+                                <md-button class="md-icon-button" ng-click="efetivar(alerta,alerta.Parcela.LanDatPag, $event)">
+                                    <md-icon><md-tooltip>Efetivar</md-tooltip>done</md-icon>
+                                </md-button>
+                            </div>
+                        </div>
+                        <md-divider></md-divider>
+                        <a href="#/LancamentosAlerta" class="button-bottom md-ink-ripple">
+                            Visualizar todos
+                        </a>
+                    </div>
+                </li>
+                <li class="dropdown" ng-controller="LoginController">
+                    <a href class="dropbtn"><img class="circle avatar" ng-src="Images/avatar/{{USER_INFO.Avatar}}" /></a>
+                    <div class="dropdown-content">
+                        <div>Logado como: <span class="bold"> {{USER_INFO.UsuNom}}</span></div>
+                        <a href="#/Perfil"><md-icon>person</md-icon>Minha Conta</a>
+                        <a href="#/Config"><md-icon>build</md-icon>Configurações</a>
+                        <a href="admin/admin.html"><md-icon>settings</md-icon>Administração</a>
+                        <a href="#" ng-click="logoff()"><md-icon>close</md-icon>Logoff</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <md-progress-linear class="md-accent md-hue-2" md-mode="indeterminate" layout flex ng-show="Loading"></md-progress-linear>
+
+    </header>
+    <main layout="row" layout-align="center start" flex>
+        <div ng-view ng-cloak flex-gt-sm="90" flex></div>
+    </main>
+
+    <!--<footer>
+        <div layout="row">
+            Rodapé
+        </div>
+    </footer>-->
+</body>
+</html>
+

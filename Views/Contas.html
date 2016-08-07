@@ -1,0 +1,64 @@
+﻿<div id="main-content" ng-init="loadContas()">
+    <h1>Contas bancárias</h1>
+    <div class="card-section card-header">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button ng-click="criarConta()">
+                    <md-icon>add</md-icon>
+                    <md-tooltip>Nova Conta</md-tooltip>
+                    Nova Conta
+                </md-button>
+
+                <md-button ng-click="transferir()" ng-show="Contas.length > 1">
+                    <md-icon>swap_horiz</md-icon>
+                    <md-tooltip>Transferir</md-tooltip>
+                    Transferir
+                </md-button>
+            </div>
+        </md-toolbar>
+    </div>
+    <div class="card-section">
+        <span class="no-records" ng-show="Contas.length == 0 && !Loading">Nenhuma conta cadastrada</span>
+    </div>
+    <div class='grid' ng-show="Contas.length > 0">
+        <div class="grid-row grid-header">
+            <div class="grid-column-titles">
+                <div flex="10"></div>
+                <div flex><a href ng-click="setOrder('ConDes')" ng-class="{'is-sorted-asc':orderBy==='ConDes' && !orderReverse,'is-sorted-desc':orderBy==='ConDes' && orderReverse}">Descrição</a></div>
+                <div flex="20">Banco</div>
+                <div flex="20"><a href ng-click="setOrder('ConSal')" ng-class="{'is-sorted-asc':orderBy==='ConSal' && !orderReverse,'is-sorted-desc':orderBy==='ConSal' && orderReverse}">Saldo</a></div>
+            </div>
+        </div>
+        <div class="grid-row" ng-repeat="Conta in Contas | orderBy:orderBy:orderReverse">
+            <div class="grid-row-wrapper">
+                <div flex="10">
+                    <md-button class="md-icon-button" ng-click="deleteConta(Conta)" ng-show="!Conta.ConFix"><md-icon>delete<md-tooltip md-direction="top">Excluir</md-tooltip></md-icon></md-button>
+                    <md-button class="md-icon-button" ng-click="editarConta(Conta)"><md-icon>create<md-tooltip md-direction="top">Editar</md-tooltip></md-icon></md-button>
+                </div>
+                <div flex>{{Conta.ConDes}}</div>
+                <div flex="20">{{Conta.Banco.Nome}}</div>
+                <div flex="20" ng-class="{'corCredito':Conta.ConSal>=0, 'corDebito':Conta.ConSal<0}">
+                    {{Conta.ConSal | currency}}
+                    <md-button class="md-icon-button" ng-click="ajustarSaldo(Conta, $event)"><md-icon>create<md-tooltip md-direction="top">Editar o saldo</md-tooltip></md-icon></md-button>
+                </div>
+            </div>
+        </div>
+        <div class="grid-footer">
+            <div class="grid-row">
+                <div class="grid-row-wrapper">
+                    <div flex="10">Total</div>
+                    <div flex></div>
+                    <div ng-class="{'corCredito':SaldoTotal>=0, 'corDebito':SaldoTotal<0}" flex="20">{{SaldoTotal | currency}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <md-fab-speed-dial md-open="isOpen" md-direction="up" class="md-scale md-fab-bottom-right" ng-mouseenter="isOpen=true" ng-mouseleave="isOpen=false">
+        <md-fab-trigger>
+            <md-button class="md-fab md-warn" ng-click="criarConta()">
+                <md-icon>add</md-icon>
+            </md-button>
+        </md-fab-trigger>
+    </md-fab-speed-dial>
+</div>

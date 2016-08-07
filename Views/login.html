@@ -1,0 +1,46 @@
+﻿<div class="login-box">
+    <form name="loginForm">
+        <md-card class="md-whiteframe-4dp ">
+            <md-card-header >
+                <div class="logo"><img height="40" src="Images/logo xpense.png" /></div>
+            </md-card-header>
+            <md-card-content layout="column">
+                <div layout>
+                    <md-input-container flex>
+                        <label>Login</label>
+                        <md-icon>person</md-icon>
+                        <input name="login" flex type="text" ng-model="login" ng-pattern="/^.+@.+\..+$/" ng-required="true" />
+                        <div ng-messages="loginForm.login.$error">
+                            <div ng-message="required">Login inválido.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div layout>
+                    <md-input-container flex>
+                        <label>Senha</label>
+                        <md-icon>lock</md-icon>
+                        <input name="senha" type="password" ng-model="senha" focus-if="true" ng-required="true" />
+                        <div ng-messages="loginForm.senha.$error">
+                            <div ng-message="required">Informe a senha.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div>
+                    <md-checkbox ng-model="memorizar">
+                        Memorizar login
+                    </md-checkbox>
+                </div>
+
+                <md-button type="submit" class="md-primary md-accent" ng-click="efetuarLogin(login,senha,memorizar)" ng-disabled="!loginForm.$valid">Login</md-button>
+            </md-card-content>
+        </md-card>
+        <div flex layout="row">
+            <div flex>
+                <a href="#/RecuperarSenha">Esqueci a senha</a>
+            </div>
+            <div flex>
+                <a href="#/CriarConta">Criar Conta</a>
+            </div>
+        </div>
+    </form>
+</div>

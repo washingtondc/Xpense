@@ -1,0 +1,56 @@
+﻿@font-face {
+    font-family: 'Roboto';
+    src: url('../../FONTS/roboto_regular/Roboto-Regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+ 
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('../../FONTS/roboto_bold/Roboto-Bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Thin';
+    src: url('../../FONTS/roboto_thin/Roboto-Thin.ttf') format('truetype');
+    font-weight: lighter;
+    font-style: normal;
+}
+ 
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'), 
+      local('MaterialIcons-Regular'), 
+      url('../../FONTS/MaterialIcons-Regular.ttf') format('truetype');
+}
+
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}

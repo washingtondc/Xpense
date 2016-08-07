@@ -1,0 +1,117 @@
+﻿<md-dialog aria-label="Novo Lançamento" ng-cloak flex="50">
+    <form name="frmLancamento" novalidate ng-submit="frmLancamento.$valid && Salvar()">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{TituloJanela}}</h2>
+                <h3>{{Lancamento.LanDes}}</h3>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" layout="column">
+                <div layout="row">
+                    <md-input-container flex>
+                        <label>Descrição</label>
+                        <input name="LanDes" maxlength="100" ng-model="Lancamento.LanDes" ng-required="true" focus-if>
+                        <div ng-messages="frmLancamento.LanDes.$error">
+                            <div ng-message="required">Preencha a descrição.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div layout="row">
+                    <div flex>
+                        <md-input-container>
+                            <label>Valor</label>
+                            <input id="txtLanVal" name="LanVal" type="text" ng-model="Lancamento.LanVal" ng-required="true" format="number" greater-than="0" />
+                            <div ng-messages="frmLancamento.LanVal.$error">
+                                <div ng-message="required">Informe o valor.</div>
+                                <div ng-message="greaterThan">Valor deve ser maior que zero.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div flex="30" ng-if="!LancamentoNoCartao">
+                        <md-checkbox ng-model="Lancamento.LanEft">
+                            <span ng-show="Lancamento.LanTip=='S'">Está paga</span>
+                            <span ng-show="Lancamento.LanTip=='E'">Recebido</span>
+                        </md-checkbox>
+                    </div>
+                    <div flex="40" ng-if="!LancamentoNoCartao">
+                        <md-datepicker ng-model="Lancamento.LanDat" ng-required="true">Data</md-datepicker>
+                    </div>     
+                </div> 
+
+                <div layout="row">
+                    <md-input-container flex="50">
+                        <label>Categoria</label>
+                        <md-select name="CatCod" ng-model="Lancamento.CatCod" ng-required="true" placeholder="Selecione a categoria">
+                            <md-option value="{{Categoria.CatCod}}" ng-repeat="Categoria in Categorias">{{Categoria.CatNom}}</md-option>
+                        </md-select>
+                        <div ng-messages="frmLancamento.CatCod.$error">
+                            <div ng-message="required">Selecione a categoria.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex="50" ng-if="!LancamentoNoCartao">
+                        <label>Conta</label>
+                        <md-select name="ConDes" ng-model="Lancamento.ConCod" ng-required="!LancamentoNoCartao" placeholder="Selecione a conta">
+                            <md-option value="{{Conta.ConCod}}" ng-repeat="Conta in Contas">{{Conta.ConDes}}</md-option>
+
+                        </md-select>
+                        <div ng-messages="frmLancamento.ConDes.$error">
+                            <div ng-message="required">Selecione a conta.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex="50" ng-if="LancamentoNoCartao">
+                        <label>Cartão</label> 
+                        <md-select name="CarCod" ng-model="Lancamento.CarCod" ng-required="LancamentoNoCartao" placeholder="Selecione o cartão">
+                            <md-option value="{{Cartao.CarCod}}" ng-repeat="Cartao in Cartoes">{{Cartao.CarNom}}</md-option>
+                        </md-select>
+                        <div ng-messages="frmLancamento.CarCod.$error">
+                            <div ng-message="required">Selecione o cartão.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div layout="row" ng-show="!LancamentoNoCartao">
+                    <md-checkbox ng-model="LancamentoRepetir">
+                        Lançamento Repetitivo 
+                    </md-checkbox>
+                </div>
+
+                <div layout="row" ng-show="LancamentoRepetir && !LancamentoNoCartao">
+                    <md-checkbox ng-model="Lancamento.LanFix">
+                        Fixo
+                    </md-checkbox>
+                </div>
+                <div layout="row" ng-show="LancamentoRepetir && !Lancamento.LanFix">
+                    <md-input-container flex>
+                        <label>Parcelas</label>
+                        <input type="text" maxlength="3" ng-model="Lancamento.LanQtdPar" ng-required="LancamentoRepetir && !Lancamento.LanFix" />
+                    </md-input-container>
+                </div>
+
+                <div layout="row">
+                    <md-input-container flex>
+                        <label>Detalhes</label>
+                        <textarea ng-model="Lancamento.LanDet"></textarea>
+                    </md-input-container>
+                </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancel()">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-disabled="!frmLancamento.$valid">
+                Salvar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+

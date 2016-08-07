@@ -1,0 +1,150 @@
+﻿<div id="main-content" ng-init="init()">
+    <h1>Lançamentos de {{meses[mes-1]}}</h1>
+    <div class="card-section card-header">
+        <md-toolbar layout>
+            <div class="md-toolbar-tools">
+                <md-button ng-click="novaReceita()">
+                    <md-icon>add</md-icon>
+                    Nova Receita
+                </md-button>
+                <md-button ng-click="novaDespesa()">
+                    <md-icon>add</md-icon>
+                    Nova Despesa
+                </md-button>
+                <md-button ng-click="novaDespesaCartao()">
+                    <md-icon>credit_card</md-icon>
+                    Nova Despesa no Cartão
+                </md-button>
+
+                <span flex></span>
+
+                <month-navigation></month-navigation>
+            </div>
+        </md-toolbar>
+    </div>
+    <div class="card-section" ng-show="Lancamentos.length === 0 && !Loading">
+        <span class="no-records"> nenhum lançamento cadastrado</span>
+    </div>
+    <div class="grid" ng-show="Lancamentos.length > 0 && !Loading" ng-cloak>
+        <!--CABEÇALHO-->
+        <div class="grid-row grid-header">
+            <div class="grid-column-titles">
+                <div flex="5"><a href ng-click="setOrder('LanDia')" ng-class="{'is-sorted-asc':orderBy==='LanDia' && !orderReverse,'is-sorted-desc':orderBy==='LanDia' && orderReverse}">Dia</a></div>
+                <div flex="15"></div>
+                <div flex="5"></div>
+                <div flex><a href ng-click="setOrder('LanDes')" ng-class="{'is-sorted-asc':orderBy==='LanDes' && !orderReverse,'is-sorted-desc':orderBy==='LanDes' && orderReverse}">Descrição</a> </div>
+                <div flex="5"></div>
+                <div flex="15"><a href ng-click="setOrder('CatCod')" ng-class="{'is-sorted-asc':orderBy==='CatCod' && !orderReverse,'is-sorted-desc':orderBy==='CatCod' && orderReverse}">Categoria</a></div>
+                <div flex="10"><a href ng-click="setOrder('LanVal')" ng-class="{'is-sorted-asc':orderBy==='LanVal' && !orderReverse,'is-sorted-desc':orderBy==='LanVal' && orderReverse}">Valor</a></div>
+            </div>
+        </div>
+        <div ng-show="Lancamentos.length > 0 && !Loading">
+            <div class="grid-row" ng-class="{'grid-row-expanded':Lancamento.Cartao.FaturaAtual.Visivel, 'left-border-credito':Lancamento.LanTip==='E','left-border-debito':Lancamento.LanTip==='S'}" ng-repeat="Lancamento in Lancamentos | orderBy:orderBy:orderReverse">
+                <div class="grid-row-wrapper" ng-class="{'grid-row-accent':Lancamento.CarCod>0}" ng-click=" Lancamento.carcod>0 || showFatura(Lancamento,ano,mes)">
+                    <!--LINHAS DOS LANÇAMENTOS-->
+                    <!--<div layout="row">-->
+                    <div flex="5">
+                        {{Lancamento.LanDat | date:"dd"}}
+                        <span ng-show="Lancamento.LanDat < dataAtual && Lancamento.Parcela.LanEftVal===0">
+                            <md-icon>priority_high</md-icon>
+                        </span>
+                    </div>
+                    <div flex="15">
+                        <!--Delete-->
+                        <md-button class="md-icon-button" ng-show="Lancamento.CarCod==0" ng-click="Excluir(Lancamento)"><md-icon>delete<md-tooltip md-direction="top">Excluir</md-tooltip></md-icon></md-button>
+                        <!--Editar-->
+                        <md-button class="md-icon-button" ng-disabled="Lancamento.Parcela.LanEftVal>0" ng-click="editarLancamento(Lancamento)" ng-show="Lancamento.CarCod==0"><md-icon>create<md-tooltip md-direction="top">Editar</md-tooltip></md-icon></md-button>
+                        <!--Efetivar lancamento-->
+                        <md-button class="md-icon-button" ng-show="Lancamento.Parcela.LanEftVal==0 && Lancamento.CarCod==0" ng-click="efetivar(Lancamento,Lancamento.Parcela.LanDatPag,$event)"><md-icon><md-tooltip md-direction="top">Efetivar</md-tooltip>done</md-icon></md-button>
+                        <!--Efetivar fatura-->
+                        <md-button class="md-icon-button" href ng-controller="FaturasController" ng-click="pagarFatura(Lancamento.CarCod, Mes, Ano, valorTotalFatura, $event)" ng-show="Lancamento.CarCod>0"><md-icon><md-tooltip md-direction="top">Pagar fatura</md-tooltip>done</md-icon></md-button>
+                        <!--Reabrir-->
+                        <md-button class="md-icon-button" ng-click="reabrirLancamento(Lancamento)" ng-show="Lancamento.Parcela.LanEftVal>0"><md-icon>cached<md-tooltip md-direction="top">Reabrir</md-tooltip></md-icon></md-button>
+                    </div>
+                    <div flex="5">
+                        <md-icon ng-show="Lancamento.CarCod>0">credit_card</md-icon>
+                        <md-icon ng-show="Lancamento.LanFix && Lancamento.CarCod==0">history<md-tooltip md-direction="top">Lançamento fixo</md-tooltip></md-icon>
+                    </div>
+                    <div flex>
+                        <span ng-class="{'deleted':Lancamento.Parcela.LanEftVal>0}">{{Lancamento.LanDes}}</span>
+                        <span ng-show="Lancamento.LanQtdPar>1 && Lancamento.LanFix==false">({{Lancamento.Parcela.ParSeq}}/{{Lancamento.LanQtdPar}})</span>
+                    </div>
+                    <div flex="5">
+                        <span class="circle circleCorCategoria" ng-style="{'background-color': Lancamento.Categoria.CatCor }" ng-show="Lancamento.Categoria.CatCor"></span>
+                    </div>
+                    <div flex="15">
+                        {{Lancamento.Categoria.CatNom}}
+                    </div>
+                    <div class="align-right" flex="10" ng-class="{'corCredito':Lancamento.LanTip==='E', 'corDebito':Lancamento.LanTip==='S'}">
+                        {{Lancamento.LanVal| currency}}
+                    </div>
+                    <!--</div>-->
+                </div>
+                <!--PAINEL DA FATURA-->
+                <div class="grid-row-panel">
+                    <div class="grid-row-wrapper" layout="row" ng-repeat="LancamentoFatura in Lancamento.Cartao.FaturaAtual.Lancamentos">
+                        <div flex="5">
+                            {{Lancamento.LanDat | jsDate | date:"dd"}}
+                        </div>
+                        <div flex="25" layout="row">
+                            <!--Delete-->
+                            <md-button class="md-icon-button" ng-show="!LancamentoFatura.Cartao.FaturaAtual.Efetivada" ng-click="Excluir(LancamentoFatura)"><md-icon>delete<md-tooltip md-direction="top">Excluir</md-tooltip></md-icon></md-button>
+                            <!--Editar-->
+                            <md-button class="md-icon-button" ng-click="editarLancamento(LancamentoFatura)" ng-show="!LancamentoFatura.Cartao.FaturaAtual.Efetivada"><md-icon>create<md-tooltip md-direction="top">Editar</md-tooltip></md-icon></md-button>
+                        </div>
+                        <div flex>
+                            <span ng-class="{'deleted':Lancamento.Cartao.FaturaAtual.Efetivada}">{{LancamentoFatura.LanDes}}</span>
+                            <span>({{LancamentoFatura.Parcela.ParSeq}}/{{LancamentoFatura.LanQtdPar}})</span>
+                        </div>
+                        <div flex="5">
+                            <span class="circle circleCorCategoria" ng-style="{'background-color': Lancamento.Categoria.CatCor }" ng-show="Lancamento.Categoria.CatCor"></span>
+                        </div>
+                        <div flex="15">
+                            {{LancamentoFatura.Categoria.CatNom}}
+                        </div>
+                        <div flex="10">
+                            {{LancamentoFatura.LanVal | currency}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-footer">
+                <div class="grid-row">
+                    <div class="grid-row-wrapper ">
+                        <div flex="5">Saldo</div>
+                        <div flex="15"></div>
+                        <div flex="5"></div>
+                        <div flex></div>
+                        <div flex="5"></div>
+                        <div flex="15"></div>
+                        <div flex="10" ng-class="{'corCredito':SaldoFinal>=0, 'corDebito':SaldoFinal<0}">
+                            {{SaldoFinal | currency}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <md-fab-speed-dial md-open="isOpen" md-direction="up" class="md-scale md-fab-bottom-right" ng-mouseenter="isOpen=true" ng-mouseleave="isOpen=false">
+        <md-fab-trigger>
+            <md-button class="md-fab md-warn">
+                <md-icon>add</md-icon>
+            </md-button>
+        </md-fab-trigger>
+        <md-fab-actions>
+            <md-button class="md-fab md-raised md-mini" ng-click="novaReceita()">
+                <md-tooltip md-direction="left">Nova Receita</md-tooltip>
+                <md-icon>monetization_on</md-icon>
+            </md-button>
+            <md-button class="md-fab md-raised md-mini" ng-click="novaDespesa()">
+                <md-tooltip md-direction="left">Nova Despesa</md-tooltip>
+                <md-icon>view_list</md-icon>
+            </md-button>
+            <md-button class="md-fab md-raised md-mini" ng-click="novaDespesaCartao()">
+                <md-tooltip md-direction="left">Lançamento no Cartão</md-tooltip>
+                <md-icon>local_atm</md-icon>
+            </md-button>
+        </md-fab-actions>
+    </md-fab-speed-dial>
+</div>

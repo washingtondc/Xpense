@@ -1,0 +1,39 @@
+﻿<div class="login-box">
+    <form name="frmRecuperarSenha" novalidate>
+        <md-card id="main-content">
+            <md-card-header>
+                <div class="logo"><img height="40" src="Images/logo xpense.png" /></div>
+                <h1>Recuperar Senha</h1>
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <md-button ng-click="RecuperarSenha()" ng-disabled="frmRecuperarSenha.$invalid">
+                            <md-tooltip>Recuperar Senha</md-tooltip>
+                            <md-icon>save</md-icon>
+                            Recuperar Senha
+                        </md-button>
+                    </div>
+                </md-toolbar>
+            </md-card-header>
+            <md-card-content>
+
+                <div layout flex>
+                    <md-input-container flex>
+                        <label>Email</label>
+                        <md-icon>email</md-icon>
+                        <input name="EmailRecuperarSenha" ng-model="EmailRecuperarSenha" focus-if ng-required="true" ng-pattern="/^.+@.+\..+$/" />
+                        <div ng-messages="frmRecuperarSenha.EmailRecuperarSenha.$error">
+                            <div ng-message="required">Preencha o email.</div>
+                            <div ng-message="pattern">Informe um email válido.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+            </md-card-content>
+        </md-card>
+        <div flex layout="row">
+            <div flex>
+                <a href="#/Login">Voltar ao login</a>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,48 @@
+﻿<md-dialog aria-label="Pagar Fatura" ng-cloak flex="30">
+    <form name="frmPagarFatura" novalidate ng-submit="frmPagarFatura.$valid && Salvar()">
+        <md-toolbar>
+            <div class="md-toolbar-tools" ng-class="BorderRed">
+                <h2>Pagar Fatura</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+
+                <div layout layout-sm="row">
+                    <div flex="50">
+                        <md-input-container>
+                            <label>Valor</label>
+                            <input name="LanVal" type="text" ng-model="ValorFatura" ng-required="true" focus-if greater-than="0" / >
+                            <div ng-messages="frmPagarFatura.LanValValorFatura.$error">
+                                <div ng-message="required">Informe o valor.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <md-input-container flex="50" ng-show="!LancamentoNoCartao">
+                        <label>Conta</label>
+                        <md-select name="ConDes" ng-model="ConCod" ng-required="true">
+                            <md-option value="{{Conta.ConCod}}" ng-repeat="Conta in Contas">{{Conta.ConDes}}</md-option>
+                        </md-select>
+                        <div ng-messages="frmPagarFatura.ConDes.$error">
+                            <div ng-message="required">Selecione a conta.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancel()">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-disabled="!frmPagarFatura.$valid" ng-click="EfetuarPagamento()">
+                Pagar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

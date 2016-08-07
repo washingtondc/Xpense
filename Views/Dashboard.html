@@ -1,0 +1,169 @@
+﻿<div id="main-content" ng-init="init()">
+    <h1>Dashboard</h1>
+
+    <div layout-gt-xs="row" layout="column">
+        <md-card flex class="box-saldo saldo-atual md-whiteframe-4dp">
+            <md-card-content>
+                <a href="#/Contas" layout="column">
+                    <md-tooltip>Visualizar as contas</md-tooltip>
+                    <div layout="row">
+                        <h1>Saldo atual</h1>
+                    </div>
+                    <div layout="row">
+                        <div class="cifrao" flex>
+                            {{cifrao}}
+                        </div>
+                        <div ng-class="{'corCredito':SaldoAtual>=0, 'corDebito':SaldoAtual<0}">
+                            <span class="label-saldo">{{SaldoAtual | currency:""}}</span>
+                        </div>
+                    </div>
+                </a>
+            </md-card-content>
+        </md-card>
+
+        <md-card layout="row" flex class="box-saldo md-whiteframe-4dp">
+            <div class="box-saldo-operation">
+                +
+            </div> 
+            <md-card-content flex>
+                <a href="#/Lancamentos/P/E">
+                    <div>
+                        <md-tooltip>Visualizar os lançamentos</md-tooltip>
+                        <h1>Valor pendente a receber</h1>
+                    </div>
+                    <div layout="row">
+                        <div flex>
+                            <div class="cifrao">{{cifrao}}</div>
+                        </div>
+                        <div><span class="label-saldo corCredito">{{ValorReceber | currency:""}}</span></div>
+                    </div>
+                </a>
+            </md-card-content>
+        </md-card>
+
+        <md-card layout="row" flex class="box-saldo md-whiteframe-4dp">
+            <div class="box-saldo-operation">
+                -
+            </div>
+            <md-card-content flex>
+                <a href="#/Lancamentos/P/S" class="corDebito">
+                    <div layout="row">
+                        <md-tooltip>Visualizar os lançamentos</md-tooltip>
+                        <h1>Valor pendente a pagar</h1>
+                    </div>
+                    <div layout="row">
+                        <div flex>
+                            <div class="cifrao">{{cifrao}}</div>
+                        </div>
+                        <div>
+                            <span class="label-saldo">
+                                {{ValorPagar | currency:""}}
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </md-card-content>
+        </md-card>
+
+        <md-card layout="row" flex class="box-saldo md-whiteframe-4dp">
+            <div class="box-saldo-operation">
+                =
+            </div>
+            <md-card-content flex>
+                <div layout="row">
+                    <h1>Saldo final previsto</h1>
+                </div>
+                <div layout="row">
+                    <div flex>
+                        <div class="cifrao">{{cifrao}}</div>
+                    </div>
+                    <div ng-class="{'corCredito':SaldoPrevisto>=0, 'corDebito':SaldoPrevisto<0}">
+                        <span class="label-saldo">{{SaldoPrevisto | currency:""}}</span>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <div layout="column" layout-gt-xs="row">
+        <md-card flex="50" class="md-whiteframe-4dp">
+            <md-card-content>
+                <h1>Gastos por categoria</h1>
+                <div id="GastosCategoria"></div>
+            </md-card-content>
+        </md-card>
+
+        <md-card flex="50" class="md-whiteframe-4dp">
+            <md-card-content ng-controller="CartoesController" ng-init="loadCartoes()">
+                <h1>Cartões de crédito</h1>
+                <div class="no-records" ng-show="Cartoes.length == 0">Nenhum cartão cadastrado</div>
+                <div ng-repeat="Cartao in Cartoes" class="md-padding CartaoCredito">
+
+                    <div layout="row" class='NomeCartao'>
+                        <div><md-icon class="pf pf-{{Cartao.CarBan | lowercase}} "></md-icon></div>
+                        {{Cartao.CarNom}}
+                    </div>
+                    <div layout="row">
+                        <div layout="column" flex="50" class="md-padding">
+                            <div class="DataFatura">Fatura Atual ({{Cartao.FaturaAtual.Data | date:'dd/MM/yyyy'}})</div>
+                            <div class="ValorFatura" layout="row" ng-class="{'deleted':FaturaPaga}">
+                                <a href="#/Fatura/{{Cartao.CarCod}}/{{Cartao.FaturaAtual.Data.getFullYear()}}/{{Cartao.FaturaAtual.Data.getMonth()+1}}">{{Cartao.FaturaAtual.Valor | currency}}</a>
+                                <div ng-controller="FaturasController">
+                                    <md-button class="md-icon-button" ng-click="pagarFatura(Cartao.CarCod,Cartao.Mes,Cartao.Ano,Cartao.ValorFaturaAtual)" ng-show="!Cartao.FaturaPaga"><md-icon><md-tooltip>Pagar fatura</md-tooltip>thumb_up</md-icon></md-button>
+                                </div>
+                            </div>
+                        </div>
+                        <div layout="column" flex="50" class="md-padding">
+                            <div class='DataFatura'>Próxima ({{Cartao.ProximaFatura.Data | date:'dd/MM/yyyy'}})</div>
+                            <div class='ValorFatura'>{{Cartao.ProximaFatura.Valor | currency}}</div>
+                        </div>
+                    </div>
+
+                    <md-progress-linear md-mode="determinate" value="{{Cartao.Porcentagem}}"></md-progress-linear>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <div layout="row">
+        <md-card flex="50" class="md-whiteframe-4dp">
+            <md-card-content>
+                <h1>Saldo do mês</h1>
+                <div id="SaldoMes"></div>
+            </md-card-content>
+        </md-card>
+
+        <md-card flex="50" class="md-whiteframe-4dp">
+            <div id="calendar"></div>
+        </md-card>
+    </div>
+    </md-card-content>
+
+    <md-fab-speed-dial md-open="isOpen" md-direction="up" class="md-scale md-fab-bottom-right" ng-mouseenter="isOpen=true" ng-mouseleave="isOpen=false">
+        <md-fab-trigger>
+            <md-button class="md-fab md-warn">
+                <md-icon>add</md-icon>
+            </md-button>
+        </md-fab-trigger>
+        <md-fab-actions>
+            <md-button class="md-fab md-raised md-mini">
+                <md-tooltip md-direction="left">Lançamento</md-tooltip>
+                <md-icon>monetization_on</md-icon>
+            </md-button>
+            <md-button class="md-fab md-raised md-mini">
+                <md-tooltip md-direction="left">Categoria</md-tooltip>
+                <md-icon>view_list</md-icon>
+            </md-button>
+            <md-button class="md-fab md-raised md-mini">
+                <md-tooltip md-direction="left">Conta</md-tooltip>
+                <md-icon>local_atm</md-icon>
+            </md-button>
+            <md-button class="md-fab md-raised md-mini">
+                <md-tooltip md-direction="left">Cartão</md-tooltip>
+                <md-icon>credit_card</md-icon>
+            </md-button>
+        </md-fab-actions>
+    </md-fab-speed-dial>
+    </md-card>
+
+

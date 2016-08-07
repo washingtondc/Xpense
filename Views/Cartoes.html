@@ -1,0 +1,64 @@
+﻿<div id="main-content" ng-init="loadCartoes()">
+    <h1>Cartões de crédito</h1>
+    <div class="card-section card-header">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button ng-click="novoCartao()">
+                    <md-tooltip>Novo Cartão</md-tooltip>
+                    <md-icon>add</md-icon>
+                    Novo Cartão
+                </md-button>
+            </div>
+        </md-toolbar>
+    </div>
+    <div class="card-section">
+        <div class="no-records" ng-show="Cartoes.length == 0 && !Loading">Nenhum cartão cadastrado</div>
+    </div>
+    <div class='grid' ng-show="Cartoes.length > 0">
+        <div class="grid-row grid-header">
+
+            <div class="grid-column-titles">
+                <div flex="10"></div>
+                <div flex><a href ng-click="setOrder('CarDes')" ng-class="{'is-sorted-asc':orderBy==='CarDes' && !orderReverse,'is-sorted-desc':orderBy==='CarDes' && orderReverse}">Descrição</a></div>
+                <div flex="15"><a href ng-click="setOrder('CarLim')" ng-class="{'is-sorted-asc':orderBy==='CarLim' && !orderReverse,'is-sorted-desc':orderBy==='CarLim' && orderReverse}">Limite</a></div>
+                <div flex="15">Disponível</div>
+                <div flex="15">Fatura atual</div>
+                <div flex="15">Próxima fatura</div>
+            </div>
+        </div>
+
+        <div class="grid-row" ng-repeat="Cartao in Cartoes | orderBy:orderBy:orderReverse">
+            <div class="grid-row-wrapper">
+                <div flex="10">
+                    <md-button class="md-icon-button" ng-click="deleteCartao(Cartao)"><md-icon>delete<md-tooltip md-direction="top">Excluir</md-tooltip></md-icon></md-button>
+                    <md-button class="md-icon-button" ng-click="editarCartao(Cartao)"><md-icon>create<md-tooltip md-direction="top">Editar</md-tooltip></md-icon></md-button>
+                </div>
+                <div flex><div><md-icon class="pf pf-{{Cartao.CarBan | lowercase}} md-padding"></md-icon></div>{{Cartao.CarNom}}</div>
+                <div flex="15">{{Cartao.CarLim | currency}}</div>
+                <div flex="15"></div>
+                <div flex="15">
+                    <a href="#/Fatura/{{Cartao.CarCod}}/{{Cartao.FaturaAtual.Data.getFullYear()}}/{{Cartao.FaturaAtual.Data.getMonth()+1}}">
+                        <md-tooltip md-direction="top">Ver fatura</md-tooltip>
+                        <md-icon>description</md-icon>
+                        {{Cartao.FaturaAtual.Valor | currency}}
+                    </a>
+                </div>
+                <div flex="15">
+                    <a href="#/Fatura/{{Cartao.CarCod}}/{{Cartao.ProximaFatura.Data.getFullYear()}}/{{Cartao.ProximaFatura.Data.getMonth()+1}}">
+                        <md-tooltip md-direction="top">Ver fatura</md-tooltip>
+                        <md-icon>description</md-icon>
+                        {{Cartao.ProximaFatura.Valor | currency}}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <md-fab-speed-dial md-open="isOpen" md-direction="up" class="md-scale md-fab-bottom-right" ng-mouseenter="isOpen=true" ng-mouseleave="isOpen=false">
+        <md-fab-trigger>
+            <md-button class="md-fab md-warn" ng-click="novoCartao()">
+                <md-icon>add</md-icon>
+            </md-button>
+        </md-fab-trigger>
+    </md-fab-speed-dial>
+
+</div>

@@ -1,0 +1,63 @@
+﻿<md-card id="main-content" class="md-whiteframe-8dp" ng-init="init()">
+    <md-card-title layout="column">
+        <h1>Dashboard</h1>
+
+        <md-toolbar layout>
+            <div class="md-toolbar-tools">
+                <span flex></span>
+                <month-navigation></month-navigation>
+            </div>
+        </md-toolbar>
+    </md-card-title>
+    <md-card-content>
+        <div layout-gt-xs="row" layout="column">
+            <md-card flex class="box-saldo md-whiteframe-4dp">
+                <md-card-content>
+                    <a href="#/Contas">
+                        <h1>Lançamentos</h1>
+                        <div layout="row">
+                            <div flex>
+                                <span class="label-saldo">{{qtdTotalLancamentos}}</span>
+                            </div>
+                        </div>
+                    </a>
+                </md-card-content>
+            </md-card>
+
+            <md-card flex class="box-saldo md-whiteframe-4dp">
+                <md-card-content>
+                    <a href="#/Usuarios">
+                        <h1>Usuários</h1>
+                        <div layout="row">
+                            <div flex>{{qtdTotalUsuarios}}</div>
+                        </div>
+                    </a>
+                </md-card-content>
+            </md-card>
+
+            <md-card flex class="box-saldo md-whiteframe-4dp">
+                <md-card-content>
+                        <h1>Contas</h1>
+                        <div layout="row">
+                            <div flex="80">{{qtdTotalContas}}</div>
+                        </div>
+                </md-card-content>
+            </md-card>
+
+            <md-card flex class="box-saldo md-whiteframe-4dp">
+                <md-card-content>
+                    <h1>Categorias</h1>
+                    <div layout="row">
+                        <div>
+                            {{qtdTotalCategorias}}
+                        </div>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+
+        
+    </md-card-content>
+</md-card>
+
+

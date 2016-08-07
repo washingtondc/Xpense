@@ -1,0 +1,38 @@
+﻿a, a:hover, a:visited {
+    text-decoration: none;
+}
+
+html, body {
+    margin: 0;
+    background-color: $lightGray;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12pt;
+}
+
+header {
+    height: 200px;
+    background-image: url("../Images/topo_background.jpg");
+    background-attachment: fixed;
+    width: 100%;
+}
+
+footer {
+    height: 4em;
+    background-color: #039BE5;
+}
+
+md-icon-button {
+    color: #000;
+    cursor: default;
+}
+
+md-fab-speed-dial {
+    visibility: hidden;
+}
+
+md-card-content h1 {
+	font-size: 15px;
+	font-weight: 600;
+	color: #808080;
+	margin: 0px;
+}

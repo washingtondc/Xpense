@@ -1,0 +1,39 @@
+﻿<md-card id="main-content" class="md-whiteframe-8dp" ng-init="init()">
+    <md-card-title layout="column">
+        <h1>Usuários</h1>
+
+    </md-card-title>
+    <md-card-content>
+        <div class="no-records" ng-show="Usuarios.length == 0">Nenhuma usuário cadastrado</div>
+        <table id='tblContas' class='table' ng-show="Usuarios.length > 0">
+            <thead>
+                <tr>
+                    <th class='col-lg-2'></th>
+                    <th class='col-lg-8'>Nome</th>
+                    <th class='col-lg-2'>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="Usuario in Usuarios">
+                    <td>
+                        <md-button class="md-icon-button" ng-if="Usuario.UsuAdmin"><md-icon>delete<md-tooltip md-direction="top">Excluir</md-tooltip></md-icon></md-button>
+                        <md-button class="md-icon-button"><md-icon>create<md-tooltip md-direction="top">Editar</md-tooltip></md-icon></md-button>
+                    </td>
+                    <td>{{Usuario.UsuNom}}</td>
+                    <td>
+                        {{Usuario.UsuEml}}
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </md-card-content>
+
+    <md-fab-speed-dial md-open="isOpen" md-direction="up" class="md-scale md-fab-bottom-right" ng-mouseenter="isOpen=true" ng-mouseleave="isOpen=false">
+        <md-fab-trigger>
+            <md-button class="md-fab md-warn" ng-click="criarConta()">
+                <md-icon>add</md-icon>
+            </md-button>
+        </md-fab-trigger>
+    </md-fab-speed-dial>
+</md-card>

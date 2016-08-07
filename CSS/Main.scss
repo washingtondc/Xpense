@@ -1,0 +1,300 @@
+﻿@import "_variables";
+@import "_base";
+@import "_normalize";
+@import "_main-menu";
+@import "_grid";
+@import "_callouts";
+@import "_dashboard";
+
+.wrapper {
+    min-height: 100%;
+    margin: 0 auto 0;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.bold{
+    font-family:'roboto-bold';
+    font-weight:600;
+}
+
+#main-content {
+    margin-top: -130px;
+
+    &> h1{
+        font-family:'Roboto-Thin';
+        margin-botton: 10px;
+        color: $whiteColor;
+        font-size: 2em;
+    }
+}
+
+.card-section {
+    position: relative;
+    background: white;
+
+    &:before {
+        @include minShadow;
+    }
+}
+
+.card-header {
+    //height: 100px;
+    padding: 10px;
+    position: relative;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    min-height: $LineHeight;
+    -moz-transition: all .15s ease-in-out;
+    -o-transition: all .15s ease-in-out;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+
+    md-toolbar {
+        padding: 0;
+        margin: 0;
+        background-color: transparent;
+    }
+
+    .md-toolbar-tools {
+        padding: 0;
+        margin: 0;
+        color: $darkGray;
+
+        md-icon {
+            color: $darkGray;
+        }
+    }
+
+    h1 {
+        margin: 0;
+        text-transform: uppercase;
+        color: $darkGray;
+        font-size: 1.3em;
+    }
+}
+
+md-toolbar {
+    background-color: transparent !important;
+}
+
+md-dialog {
+    border-radius: 0;
+
+    .md-toolbar-tools {
+        color: $darkGray;
+    }
+}
+
+// Botões das barras de ferramentas e dos dialogs
+.md-toolbar-tools, md-dialog {
+    .md-button {
+        background-color: transparent !important;
+        -moz-transition: all .15s ease-in-out;
+        -o-transition: all .15s ease-in-out;
+        -webkit-transition: all .15s ease-in-out;
+        transition: all .15s ease-in-out;
+
+        md-icon {
+            color: $darkGray;
+        }
+
+        &:hover:not([disabled]) {
+            background-color: transparent !important;
+            color: $accentColor;
+        }
+    }
+}
+
+.md-button {
+    font-weight: 600;
+    border-radius: 0;
+}
+
+.md-button:hover md-icon {
+    color: $accentColor;
+}
+
+.badge {
+    display: block;
+    position: relative;
+    margin-top: -40px;
+    margin-left: 30px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 50%;
+    background-color: $accentColor;
+    color: #FFF;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/*texto com fundo verde*/
+.saldo {
+    color: White;
+    width: 200px;
+    font-size: 200%;
+    background-color: #99cc99;
+}
+/*Texto riscado*/
+.deleted {
+    text-decoration: line-through;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.circleCorCategoria {
+    // Height + margin *2 deve ser igual à altura da linha do grid
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+}
+
+.corCredito {
+    color: $CorCredito;
+}
+
+.corDebito {
+    color: $CorDebito;
+}
+
+.bgCredito {
+    color: #FFF;
+    background-color: $CorCredito;
+}
+
+.bgDebito {
+    color: #FFF;
+    background-color: $CorDebito;
+}
+
+
+.left-border-credito {
+    border-left: 3px solid $CorCredito;
+}
+
+.left-border-debito {
+    border-left: 3px solid $CorDebito;
+}
+
+.no-records {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    font-size: 1em;
+    color: #c4c4c4;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    &:before {
+        font-family: 'Material Icons';
+        content: "\e14b";
+        font-size: 2em;
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+.sideNav-header {
+    height: 200px;
+    background-color: #88c8e4;
+}
+
+.transparent {
+    background-color: transparent !important;
+}
+
+// Card Gráfico
+#GastosCategoria {
+    min-height: 200px;
+}
+
+// Card calendário
+#calendar {
+    padding: 10px;
+}
+
+/*ANIMAÇÕES*/
+.grid-row.ng-enter {
+    opacity: 0;
+}
+
+.grid-row.ng-enter-active {
+    opacity: 1;
+}
+
+.grid-row.ng-leave {
+    left: 0;
+}
+
+.grid-row.ng-leave-active {
+    left: 100%;
+}
+
+/*TABELA DE RESUMO ANUAL*/
+.linha-entradas td {
+    color: $CorCredito;
+}
+
+.linha-saidas td {
+    color: $CorDebito;
+}
+
+/* LOGIN */
+.login-box {
+    width: 400px;
+
+    .logo {
+        display: block;
+        margin: auto;
+    }
+
+    h1 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        font-weight: 600;
+        color: $whiteColor;
+        border-left: 6px solid $accentColor;
+        margin: 0;
+        padding: 0;
+    }
+
+    md-card-header {
+        height: 120px;
+        background-image: url("../Images/topo_background.jpg");
+        background-size: cover;
+        display: flex;
+        -ms-flex-direction: column;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+    }
+
+    md-icon {
+        color: $darkGray;
+    }
+
+    a {
+        color: $darkGray;
+
+        &:hover {
+            color: $accentColor;
+        }
+    }
+}
+
+.avatar-perfil {
+    width: 100px;
+    height: 100px;
+    margin:10px;
+    border: 1px solid #CCC;
+    overflow: hidden;
+    cursor: pointer;
+}

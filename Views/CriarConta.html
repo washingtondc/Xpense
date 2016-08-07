@@ -1,0 +1,53 @@
+﻿<div class="login-box">
+    <form name="frmUsuario" novalidate ng-submit="frmUsuario.$valid && CriarConta()">
+        <md-card class="md-whiteframe-4dp">
+            <md-card-header>
+                <div class="logo"><img height="40" src="Images/logo xpense.png" /></div>
+                <h1>Criar Conta</h1>
+            </md-card-header>
+
+            <md-card-content layout="column">
+                <div layout>
+                    <md-input-container flex>
+                        <label>Nome</label>
+                        <md-icon>person</md-icon>
+                        <input name="UsuNom" ng-model="usuario.UsuNom" focus-if ng-required="true" ng-minlength="3" />
+                        <div ng-messages="frmUsuario.UsuNom.$error">
+                            <div ng-message="required">Preencha o nome.</div>
+                            <div ng-message="minlength">O nome deve ter no mínimo 3 caracteres.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div layout>
+                    <md-input-container flex>
+                        <label>Email</label>
+                        <md-icon>email</md-icon>
+                        <input name="UsuEml" ng-model="usuario.UsuEml" check-login ng-pattern="/^.+@.+\..+$/" ng-required="true" />
+                        <div ng-messages="frmUsuario.UsuEml.$error">
+                            <div ng-message="required">Informe um email válido.</div>
+                            <div ng-message="invalidUsername">Email indisponível. <a href="#/RecuperarSenha">Esqueci a senha</a></div>
+                        </div>
+
+                    </md-input-container>
+                </div>
+                <div layout>
+                    <md-input-container flex>
+                        <label>Senha</label>
+                        <md-icon>lock</md-icon>
+                        <input name="UsuSen" type="password" ng-model="usuario.UsuSen" ng-required="true" ng-minlength="3" />
+                        <div ng-messages="frmUsuario.UsuSen.$error">
+                            <div ng-message="required">Preencha a senha.</div>
+                            <div ng-message="minlength">A senha deve ter no mínimo 3 caracteres.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <md-button type="submit" class="md-accent md-raised" ng-disabled="frmUsuario.$invalid">Salvar</md-button>
+            </md-card-content>
+        </md-card>
+        <div flex layout="row">
+            <div flex>
+                <a href="#/Login">Voltar ao login</a>
+            </div>
+        </div>
+    </form>
+</div>

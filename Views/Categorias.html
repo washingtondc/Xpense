@@ -1,0 +1,62 @@
+﻿<div id="main-content">
+    <h1>Categorias</h1>
+    <div class="card-section card-header">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button ng-click="novaCategoria()">
+                    <md-icon>add</md-icon>
+                    <md-tooltip>Nova Categoria</md-tooltip>
+                    Nova Categoria
+                </md-button>
+            </div>
+        </md-toolbar>
+    </div>
+    <div class="card-section">
+        <span class="no-records" ng-show="Categorias.length == 0 && !Loading">Nenhuma categoria cadastrada</span>
+    </div>
+    <div class='grid' ng-show="Categorias.length > 0">
+        <div class="grid-row grid-header">
+            <div class="grid-column-titles">
+                <div flex="10"></div>
+                <div flex="5"></div>
+                <div flex="20"><a href ng-click="setOrder('CatNom')" ng-class="{'is-sorted-asc':orderBy==='CatNom' && !orderReverse,'is-sorted-desc':orderBy==='CatNom' && orderReverse}">Nome</a></div>
+                <div flex>Descrição</div>
+                <div flex="10"><a href ng-click="setOrder('CatOrc')" ng-class="{'is-sorted-asc':orderBy==='CatOrc' && !orderReverse,'is-sorted-desc':orderBy==='CatOrc' && orderReverse}">Orçamento</a></div>
+                <div flex="20"></div>
+            </div>
+        </div>
+
+        <div class="grid-row" ng-repeat="Categoria in Categorias | orderBy:orderBy:orderReverse">
+            <div class="grid-row-wrapper">
+                <div flex="10">
+                    <!--Delete-->
+                    <md-button class="md-icon-button" ng-click="excluirCategoria(Categoria)" ng-if="Categorias.length>1"><md-icon>delete<md-tooltip md-direction="top">Excluir</md-tooltip></md-icon></md-button>
+                    <!--Editar-->
+                    <md-button ng-click="editarCategoria(Categoria)" class="md-icon-button"><md-icon>create<md-tooltip md-direction="top">Editar</md-tooltip></md-icon></md-button>
+                </div>
+                <div flex="5">
+                    <span class="circle circleCorCategoria" ng-style="{'background-color': Categoria.CatCor }" ng-show="Categoria.CatCor"></span>
+                </div>
+                <div flex="20">{{Categoria.CatNom}}</div>
+                <div flex>{{Categoria.CatDes}}</div>
+                <div flex="10">
+                    <span ng-show="Categoria.CatOrc == 0">Indefinido</span>
+                    <span ng-show="Categoria.CatOrc > 0">{{Categoria.CatOrc | currency}}</span>
+
+                </div>
+                <div flex="20">
+                    <md-progress-linear md-mode="determinate" value="{{Categoria.ValorPrevisto/Categoria.CatOrc*100}}" ng-show="Categoria.CatOrc > 0"></md-progress-linear>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <md-fab-speed-dial md-open="colorPickerisOpen" md-direction="up" class="md-scale md-fab-bottom-right" ng-mouseenter="isOpen=true" ng-mouseleave="isOpen=false">
+        <md-fab-trigger>
+            <md-button class="md-fab md-warn" ng-click="novaCategoria()">
+                <md-icon>add</md-icon>
+            </md-button>
+        </md-fab-trigger>
+    </md-fab-speed-dial>
+</div>

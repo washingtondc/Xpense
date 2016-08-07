@@ -1,0 +1,56 @@
+﻿<md-dialog aria-label="Transferência" flex=40 ng-cloak>
+    <form name="frmTransferencia" novalidate ng-submit="EfetuarTransferencia()">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Transferência</h2>
+                <span flex></span>
+                <a class="md-icon-button" ng-click="cancel()">
+                    <md-icon>close</md-icon>
+                </a>
+            </div>
+        </md-toolbar>
+        <md-dialog-content">
+            <div class="md-dialog-content">
+                <div layout layout-sm="row">
+                    <md-input-container flex="50">
+                        <label>De:</label>
+                        <md-select name="ContaOrigem" ng-model="Transferencia.ContaOrigem" ng-required="true">
+                            <md-option value="{{Conta.ConCod}}" ng-repeat="Conta in Contas">{{Conta.ConDes}}</md-option>
+                        </md-select>
+                        <div ng-messages="frmTransferencia.ContaOrigem.$error">
+                            <div ng-message="required">Informe a conta de origem.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex="50">
+                        <label>Para</label>
+                        <md-select name="ContaDestino" ng-model="Transferencia.ContaDestino" ng-required="true" not-equal-to="Transferencia.ContaOrigem">
+                            <md-option value="{{Conta.ConCod}}" ng-repeat="Conta in Contas">{{Conta.ConDes}}</md-option>
+                        </md-select>
+                        <div ng-messages="frmTransferencia.ContaDestino.$error">
+                            <div ng-message="required">Informe a conta de destino.</div>
+                            <div ng-message="notEqualTo">Contas não podem ser iguais.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div layout layout-sm="row">
+                    <md-input-container flex>
+                        <label>Valor</label>
+                        <input name="Valor" ng-model="Transferencia.Valor" greater-than="0" format="number">
+                        <div ng-messages="frmTransferencia.Valor.$error">
+                            <div ng-message="greaterThan">Valor deve ser maior que zero.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </div>
+            </md-dialog-content>
+            <md-dialog-actions layout="row">
+                <span flex></span>
+                <md-button ng-click="cancel()">
+                    Cancelar
+                </md-button>
+                <md-button type="submit" ng-disabled="frmTransferencia.$invalid">
+                    Efetuar transferência
+                </md-button>
+            </md-dialog-actions>
+    </form>
+</md-dialog>

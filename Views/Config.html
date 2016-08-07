@@ -1,0 +1,58 @@
+﻿<div id="main-content" ng-init="getUserConfig()">
+    <h1>Minhas Configurações</h1>
+    <div class="card-section card-header">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button ng-click="saveConfig()">
+                    <md-icon>save</md-icon>
+                    Salvar Alterações
+                </md-button>               
+            </div>
+        </md-toolbar>
+    </div>
+    <div class="card-section">
+        <div layout flex>
+            <md-input-container flex>
+                <md-checkbox ng-model="config.CfgShowHelp">
+                    Exibir ajuda
+                </md-checkbox>
+            </md-input-container>
+        </div>
+
+        <div layout flex>
+            <md-input-container flex>
+                <md-checkbox ng-model="config.CfgImportShowAll">
+                    ao importar exibir todos os lançamentos
+                </md-checkbox>
+            </md-input-container>
+        </div>
+
+        <div layout flex>
+            <md-input-container flex>
+                <md-checkbox ng-model="config.CftSaldoDiario">
+                    visualizar saldo diario na tela de lançamentos
+                </md-checkbox>
+            </md-input-container>
+        </div>
+
+        <div layout flex>
+            <md-input-container flex>
+                <md-checkbox ng-model="config.CfgAlertaEmail">
+                    Enviar lembretes por email
+                </md-checkbox>
+            </md-input-container>
+        </div>
+
+        <div layout flex>
+            <md-input-container flex>
+                <label>Qtd de alertas na tela</label>
+                <md-icon>person</md-icon>
+                <input ng-model="config.CfgQtdAlertasTela" focus-if ng-required="true" />
+            </md-input-container>
+        </div>
+    </div>
+</div>
+
+
+
+

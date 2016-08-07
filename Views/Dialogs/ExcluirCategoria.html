@@ -1,0 +1,43 @@
+﻿<md-dialog aria-label="Conta" ng-cloak flex="40">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Excluir Categoria</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="bs-callout bs-callout-warning">
+                O que deseja fazer com os lançamentos dessa categoria?
+            </div>
+            <form name="frmConta">
+                <div layout="row">
+                    <md-radio-group ng-model="Operacao">
+                        <md-radio-button value="E" class="md-primary">Excluir lançamentos</md-radio-button>
+                        <md-radio-button value="M"> Mover Lançamentos </md-radio-button>
+                    </md-radio-group>
+                </div>
+                <div layout="row" ng-show="Operacao=='M'">
+                    <md-input-container flex>
+                        <label>Mover para</label>
+                        <md-select ng-model="CategoriaMover" ng-required>
+                            <md-option value="{{Categoria.CatCod}}" ng-repeat="Categoria in Categorias">{{Categoria.CatNom}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="cancel()">
+            Cancelar
+        </md-button>
+        <md-button ng-click="excluirCategoria()">
+            Excluir
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

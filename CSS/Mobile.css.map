@@ -1,0 +1,11 @@
+﻿{
+	"version": 3,
+	"file": "Mobile.css",
+	"sources": [
+		"Mobile.scss",
+		"_variables.scss"
+	],
+	"sourcesContent": [],
+	"mappings": ";ACAA,mDAAmD;AAQnD,kDAAkD;ADNlD,iBAAiB,CAAC;EACjB,UAAU,EAAE,OAAQ;CADF;;AAIV,QAAQ,CAAC,UAAU,CAAT;EAClB,OAAO,EAAC,IAAK;CADM",
+	"names": []
+}

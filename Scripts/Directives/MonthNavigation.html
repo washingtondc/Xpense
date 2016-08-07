@@ -1,0 +1,23 @@
+﻿<div>
+    <md-button class="md-icon-button" ng-click="navegaAnterior()">
+        <md-icon>chevron_left</md-icon>
+    </md-button>
+
+    <md-menu class="menu-seleciona-mes">
+        <md-button aria-label="Selecione o mês" ng-click="$mdOpenMenu()">
+            {{meses[mes-1]}} / {{ano}}
+        </md-button>
+        <md-menu-content width="4">
+            <md-menu-item ng-repeat="mes in meses">
+                <md-button ng-click="navega($index+1)">
+                    {{mes}}
+                </md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+
+
+    <md-button class="md-icon-button" ng-click="navegaProximo()">
+        <md-icon>chevron_right</md-icon>
+    </md-button>
+</div>

@@ -1,0 +1,73 @@
+﻿<form name="frmImportar" novalidate ng-init="loadOFX()">
+    <div id="main-content">
+        <h1>Importar Lançamentos</h1>
+        <div class="card-section card-header">
+            <md-toolbar layout>
+                <div class="md-toolbar-tools">
+                    <md-button ng-click="importOFX()" ng-disabled="frmImportar.$invalid">
+                        <md-icon>add</md-icon>
+                        <md-tooltip>Importar selecionados</md-tooltip>
+                        Importar selecionados
+                    </md-button>
+                </div>
+            </md-toolbar>
+        </div>
+        <div class="card-section">
+            <span class="no-records" ng-show="Lancamentos.length == 0 && !Loading">Nenhum lançamento a importar</span>
+        </div>
+        <div class="grid" ng-show="Lancamentos.length>0">
+            <div class="grid-row">
+                <md-input-container flex>
+                    <md-select name="ContaImportar" ng-model="ContaImportar" ng-required="true">
+                        <md-option value="{{Conta.ConCod}}" ng-repeat="Conta in Contas">{{Conta.ConDes}}</md-option>
+                    </md-select>
+                    <div ng-messages="frmImportar.ContaImportar.$error">
+                        <div ng-message="required">Selecione a conta.</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div class="grid-row grid-header">
+                <div class="grid-column-titles">
+                    <div flex="5">
+                        <md-button class="md-icon-button" ng-click="invertSelection()">
+                            <md-icon>flip</md-icon>
+                            <md-tooltip>Inverter seleção</md-tooltip>
+                        </md-button>
+                    </div>
+                    <div flex="10"><a href ng-click="setOrder('LanDat')" ng-class="{'is-sorted-asc':orderBy==='LanDat' && !orderReverse,'is-sorted-desc':orderBy==='LanDat' && orderReverse}">Data</a></div>
+                    <div flex><a href ng-click="setOrder('LanDes')" ng-class="{'is-sorted-asc':orderBy==='LanDes' && !orderReverse,'is-sorted-desc':orderBy==='LanDes' && orderReverse}">Descrição</a></div>
+                    <div flex="15"><a href ng-click="setOrder('LanVal')" ng-class="{'is-sorted-asc':orderBy==='LanVal' && !orderReverse,'is-sorted-desc':orderBy==='LanVal' && orderReverse}">Valor</a></div>
+                    <div flex="15"><a href ng-click="setOrder('CatCod')" ng-class="{'is-sorted-asc':orderBy==='CatCod' && !orderReverse,'is-sorted-desc':orderBy==='CatCod' && orderReverse}">Categoria</a></div>
+                </div>
+            </div>
+            
+            <div class="grid-row" ng-repeat="Lancamento in Lancamentos | orderBy:orderBy:orderReverse">
+                <div class="grid-row-wrapper">
+                    <div flex="5">
+                        <md-checkbox aria-label="Selecionado" ng-model="Lancamento.selected"></md-checkbox>
+                    </div>
+                    <div flex="10">
+                        {{Lancamento.LanDat | date:'dd/MM/yyyy'}}
+                    </div>
+                    <div flex>
+                        <md-input-container flex>
+                            <input name="LanDes" ng-model="Lancamento.LanDes" aria-label="{{Lancamento.LanDes}}" ng-required="Lancamento.selected" />
+                            <div ng-messages="frmImportar.LanDes.$error">
+                                <div ng-message="required">Informe o descritivo.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div flex="15" ng-class="{'corCredito':Lancamento.LanTip=='E', 'corDebito':Lancamento.LanTip=='S'}">
+                        {{Lancamento.LanVal | currency}}
+                    </div>
+                    <div flex="15">
+                            <md-select aria-label="Categoria a importar" ng-model="Lancamento.CatCod" ng-required>
+                                <md-option value="{{Categoria.CatCod}}" ng-repeat="Categoria in Categorias">{{Categoria.CatNom}}</md-option>
+                            </md-select>
+                        <md-button class="md-icon-button" ng-click="setCategoria(Lancamento.CatCod)"><md-icon>link</md-icon></md-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

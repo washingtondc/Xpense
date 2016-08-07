@@ -1,0 +1,121 @@
+﻿/* Variáveis */
+$LineHeight:50px;
+$IconHeights:40px;
+$LinePadding: ($LineHeight -  $IconHeights)/2;
+
+ .grid {
+    margin: auto;
+    width: 100%;
+}
+
+.grid-row {
+    position: relative;
+    background: white;
+    min-height: $LineHeight;
+    line-height: $LineHeight;
+    -moz-transition: all .15s ease-in-out;
+    -o-transition: all .15s ease-in-out;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+}
+
+.grid-row-accent{
+    cursor:pointer;
+	background-color: #CCC;
+}
+
+.grid-row::before {
+    @include minShadow;
+}
+
+.grid-column-titles {
+    //background-color: $lightGray;
+    color: $darkGray;
+    font-weight: 600;
+    display: flex;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+
+    a, a:visited{
+        color:$darkGray;
+    }
+    a:before{
+        font-family: 'Material Icons';
+        content: "\e86f";
+        display: inline-block;
+        color:#CCC;
+        vertical-align: middle;
+        transform: rotate(90deg);
+        transition: all .3s ease-in-out;
+    }
+
+    a.is-sorted-asc{
+        &:before {
+            content: "\e313";
+            transform: rotate(0);
+            color:$accentColor;
+        }
+    }
+
+    a.is-sorted-desc{
+        &:before {
+            content: "\e313";
+            color:$accentColor;
+            transform: rotate(180deg);
+
+        }
+    }
+}
+
+.grid-row-wrapper {
+    height: $LineHeight;
+    line-height: $LineHeight;
+    padding: $LinePadding;
+    display: flex;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+
+    > div {
+        display: flex;
+        -ms-flex-direction: row;
+        -webkit-flex-direction: row;
+        flex-direction: row;
+    }
+}
+
+.grid-row-panel {
+    width: calc(100% - 40px);
+    max-height: 0;
+    padding: 30px 20px;
+    font-size: 11pt;
+    color: rgba(0,0,0,0.54);
+    display: none;
+    -moz-transition: all .15s ease-in-out;
+    -o-transition: all .15s ease-in-out;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+}
+
+.grid-row.grid-row-expanded {
+    margin: 30px 0;
+	max-height:2000px;
+    box-shadow: 0 0 16px rgba(0,0,0,0.16),0 6px 12px rgba(0,0,0,0.32);
+}
+
+    .grid-row.grid-row-expanded .grid-row-panel {
+        display: inline-block;
+		max-height:2000px;
+    }
+
+.grid-footer > div {
+    font-weight: 600;
+    background-color: $lightGray;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+

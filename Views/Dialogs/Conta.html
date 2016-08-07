@@ -1,0 +1,58 @@
+﻿<md-dialog aria-label="Conta" ng-cloak flex="40">
+    <form name="frmConta" novalidate ng-submit="frmConta.$valid && Salvar()">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Conta</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div layout layout-sm="row">
+                    <md-input-container flex>
+                        <label>Descritivo</label>
+                        <input ng-model="Conta.ConDes" name="ConDes" ng-required="true" focus-if>
+                        <div ng-messages="frmConta.ConDes.$error">
+                            <div ng-message="required">Preencha o descritivo.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div layout layout-sm="row">
+                    <md-input-container flex>
+                        <label>Banco</label>
+                        <md-select name="Banco" ng-model="Conta.Banco">
+                            <md-option ng-value="{{Banco}}" ng-repeat="Banco in Bancos track by Banco.ID">{{Banco.ID}}-{{Banco.Nome}}</md-option>
+                        </md-select>
+                        <div ng-messages="frmConta.Banco.$error">
+                            <div ng-message="required">Selecione o banco.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div layout layout-sm="row">
+                    <md-input-container flex>
+                        <label>Saldo</label>
+                        <input ng-model="Conta.ConSal" ng-required="true" format="number">
+                        <div ng-messages="frmConta.ConDes.$error">
+                            <div ng-message="required">Informe o saldo.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary" ng-click="cancel()">
+                Cancelar
+            </md-button>
+            <md-button class="md-primary"  type="submit" ng-disabled="!frmConta.$valid">
+                Salvar
+            </md-button>
+        </md-dialog-actions>
+        </form>
+</md-dialog>
+

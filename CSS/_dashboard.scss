@@ -1,0 +1,59 @@
+﻿.box-saldo {
+	min-width: 200px;
+	height: 100px;
+
+	.box-saldo-operation {
+		font-size: 20px;
+		line-height: 28px;
+		text-align: center;
+		font-weight: 700;
+		width: 28px;
+		height: 28px;
+		border-radius: 50%;
+		border: 2px solid #FFF;
+		color: $whiteColor;
+		background-color: $primaryColorPalette;
+		margin: 0px;
+		position: relative;
+		left: -14px;
+		top: 50px;
+		margin-top: -13px;
+	}
+
+	h5 {
+		color: #bab3b3;
+	}
+
+	.cifrao {
+		color: #bab3b3;
+		margin-top: 7px;
+	}
+
+	.label-saldo {
+        font-family:'roboto-bold';
+		font-size: 26pt;
+	}
+}
+
+.CartaoCredito{
+	&> .NomeCartao {
+		font-size: 18pt;
+		font-weight: 600;
+	}
+
+	.ValorFatura {
+		font-size: 18pt;
+		font-weight: 600;
+	}
+
+	.DataFatura {
+		font-size: 10pt;
+		color: #808080;
+	}
+}
+
+#GastosCategoria {
+	min-height: 300px;
+}
+
+
